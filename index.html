@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Immortalia | L'Héritage Sonore & Visuel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --fond: #1e272e; /* Bleu Nuit */
+            --or: #d4af37;   /* Or Vieilli */
+            --sepia: #c0a080; /* Parchemin */
+            --rouge: #b33939; /* Rouge Grenat */
+        }
+        body {
+            font-family: 'Playfair Display', serif;
+            background-color: var(--fond);
+            color: var(--sepia);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background-image: url('https://www.transparenttextures.com/patterns/aged-paper.png'); /* Texture papier subtile */
+        }
+        /* En-tête style "Vieux Cinéma" */
+        header {
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            /* Image de fond avec filtre sépia et vignette */
+            background: linear-gradient(rgba(30,39,46,0.8), rgba(30,39,46,0.8)), url('https://images.unsplash.com/photo-1531972111231-7487a9668373?auto=format&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
+            border-bottom: 3px solid var(--or);
+        }
+        /* Le Logo Typographique */
+        .logo {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--or);
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .tagline {
+            font-style: italic;
+            font-size: 1.3rem;
+            margin-top: -10px;
+            margin-bottom: 40px;
+            color: var(--sepia);
+        }
+        
+        section { padding: 80px 20px; max-width: 1000px; margin: auto; text-align: center; }
+        h2 { font-size: 2.5rem; color: var(--or); margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px; }
+        
+        /* Les Cartes de Prix style "Écrin" */
+        .pricing-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .card {
+            border: 2px solid var(--or);
+            padding: 40px 20px;
+            border-radius: 5px;
+            background: rgba(30, 39, 46, 0.9);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2);
+        }
+        .card h3 { font-size: 1.8rem; color: var(--sepia); margin-bottom: 10px; }
+        .price { font-size: 2.5rem; color: var(--or); font-weight: 700; margin: 20px 0; }
+        
+        /* Le Bouton d'Action "Grenat" */
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background-color: var(--rouge);
+            color: var(--or);
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 2px; /* Coins moins arrondis pour un style plus classique */
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background-color 0.3s;
+            border: 1px solid var(--rouge);
+        }
+        .btn:hover {
+            background-color: transparent;
+            color: var(--rouge);
+        }
+
+        footer {
+            padding: 40px;
+            text-align: center;
+            border-top: 1px solid var(--or);
+            font-size: 0.9rem;
+            background: #151b21;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">IMMORTALIA</div>
+    <p class="tagline">Ne laissez pas vos souvenirs dormir, faites-les chanter.</p>
+    <a href="#offres" class="btn">Débuter l'Expérience</a>
+</header>
+
+<section id="concept">
+    <h2>L'Art du Souvenir 2.0</h2>
+    <p>Dans un monde qui oublie vite, nous figeons l'essentiel. Immortalia transforme vos albums photos poussiéreux en une <strong>œuvre cinématographique et musicale</strong>. Une plume poétique pour raconter, une musique pour émouvoir, et l'intelligence artificielle pour redonner vie aux instants non capturés.</p>
+</section>
+
+<section id="offres">
+    <h2>Vos Écrins Temporels</h2>
+    <div class="pricing-container">
+        <div class="card">
+            <h3>L'Étincelle</h3>
+            <p>Un hommage vibrant et percutant.</p>
+            <div class="price">49€</div>
+            <p style="font-size: 0.9rem;">(30 secondes · Idéal Réseaux Sociaux)</p>
+            <a href="TON_LIEN_GOOGLE_FORM" class="btn">Commander</a>
+        </div>
+        <div class="card" style="border-color: var(--sepia); transform: scale(1.02);"> <h3>Le Récit</h3>
+            <p>Le chapitre clé d'une vie.</p>
+            <div class="price" style="color: var(--sepia);">189€</div>
+            <p style="font-size: 0.9rem;">(2 à 3 minutes · Le choix populaire)</p>
+            <a href="TON_LIEN_GOOGLE_FORM" class="btn" style="background-color: var(--or); color: var(--fond); border-color: var(--or);">Commander</a>
+        </div>
+        <div class="card">
+            <h3>L'Héritage</h3>
+            <p>L'œuvre d'une vie entière.</p>
+            <div class="price">349€</div>
+            <p style="font-size: 0.9rem;">(5 à 6 minutes · Qualité Cinéma)</p>
+            <a href="TON_LIEN_GOOGLE_FORM" class="btn">Commander</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2026 Immortalia - Créateur d'Héritages Sonores & Visuels.</p>
+</footer>
+
+</body>
+</html>
