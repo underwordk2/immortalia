@@ -3,222 +3,973 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Immortalia | L'Héritage Sonore & Visuel</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <title>IMMORTALIA - Faites chanter vos mémoires</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --fond: #1e272e; 
-            --or: #d4af37;   
-            --sepia: #c0a080; 
-            --rouge: #b33939; 
-            --blanc-casse: #f4f4f4;
+            --gold: #d4af37;
+            --dark-gold: #b8941f;
+            --cream: #f5f1e8;
+            --dark-brown: #2a1810;
+            --medium-brown: #4a3428;
+            --light-gold: #f0e5c9;
+            --shadow: rgba(42, 24, 16, 0.3);
         }
-        
-        * { box-sizing: border-box; }
 
-        body {
-            font-family: 'Playfair Display', serif;
-            background-color: var(--fond);
-            color: var(--sepia);
+        * {
             margin: 0;
             padding: 0;
-            line-height: 1.6;
+            box-sizing: border-box;
         }
 
-        /* En-tête avec ton image locale */
-        header {
-            height: 100vh;
+        body {
+            font-family: 'Lato', sans-serif;
+            background: linear-gradient(to bottom, #1a1410, #2a1810);
+            color: var(--cream);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Effet de particules flottantes */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 50%;
+            opacity: 0;
+            animation: float 15s infinite;
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 2s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 4s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 1s; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 3s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 5s; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 2.5s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 4.5s; }
+        .particle:nth-child(9) { left: 90%; animation-delay: 1.5s; }
+        .particle:nth-child(10) { left: 15%; animation-delay: 3.5s; }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 20, 16, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            text-align: center;
-            /* L'image doit s'appeler image.jpg dans ton dossier GitHub */
-            background: linear-gradient(rgba(30,39,46,0.5), rgba(30,39,46,0.8)), url('image.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed; /* Effet de parallaxe léger */
-            border-bottom: 3px solid var(--or);
-            padding: 20px;
         }
 
         .logo {
-            font-size: clamp(3rem, 10vw, 5rem);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
             font-weight: 700;
-            color: var(--or);
-            letter-spacing: 8px;
-            text-shadow: 3px 3px 10px rgba(0,0,0,0.9);
-            margin: 0;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 4px;
         }
 
-        .tagline {
+        .nav-links a {
+            color: var(--cream);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 5% 5rem;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 1200px;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 20px rgba(212, 175, 55, 0.5);
+        }
+
+        .hero .tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: var(--light-gold);
+            margin-bottom: 2rem;
             font-style: italic;
-            font-size: clamp(1rem, 4vw, 1.5rem);
-            margin-top: 10px;
-            margin-bottom: 40px;
-            color: var(--blanc-casse);
-            text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
         }
 
-        section { 
-            padding: 100px 20px; 
-            max-width: 1200px; 
-            margin: auto; 
-            text-align: center; 
+        .hero-description {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            color: var(--cream);
+            opacity: 0;
+            animation: fadeIn 2s ease-out 0.5s forwards;
         }
 
-        h2 { 
-            font-size: 2.5rem; 
-            color: var(--or); 
-            text-transform: uppercase; 
-            margin-bottom: 40px;
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
         }
 
-        /* Grille des tarifs */
-        .pricing-container {
+        .cta-primary {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+            color: var(--dark-brown);
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.4s;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            opacity: 0;
+            animation: fadeIn 2s ease-out 1s forwards;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Section commune */
+        section {
+            position: relative;
+            z-index: 10;
+            padding: 6rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+        }
+
+        .section-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            text-align: center;
+            color: var(--light-gold);
+            margin-bottom: 4rem;
+            font-style: italic;
+        }
+
+        /* Section Concept */
+        .concept-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-top: 20px;
+            gap: 3rem;
+            margin-top: 4rem;
         }
 
-        .card {
-            border: 1px solid var(--or);
-            padding: 50px 30px;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(5px);
-            transition: all 0.4s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            border-radius: 2px;
+        .concept-card {
+            background: rgba(74, 52, 40, 0.3);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 15px;
+            padding: 2.5rem;
+            transition: all 0.4s;
+            backdrop-filter: blur(10px);
         }
 
-        .card:hover { 
-            transform: translateY(-15px); 
-            background: rgba(212, 175, 55, 0.08);
-            border-color: var(--blanc-casse);
+        .concept-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.2);
         }
 
-        .card h3 { 
-            font-size: 2rem; 
-            margin-top: 0; 
-            color: var(--blanc-casse);
+        .concept-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
         }
 
-        .price { 
-            font-size: 3.5rem; 
-            color: var(--or); 
-            font-weight: 700; 
-            margin: 25px 0; 
+        .concept-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
         }
 
-        .description {
-            font-size: 1rem;
-            min-height: 80px;
-            color: var(--sepia);
+        .concept-card p {
+            color: var(--cream);
+            line-height: 1.7;
         }
 
-        /* Boutons */
-        .btn {
-            display: inline-block;
-            padding: 20px 40px;
-            background-color: var(--rouge);
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            text-transform: uppercase;
+        /* Section Forfaits */
+        .pricing-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .pricing-card {
+            background: linear-gradient(135deg, rgba(42, 24, 16, 0.9), rgba(74, 52, 40, 0.9));
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.5s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .pricing-card:hover::before {
+            opacity: 1;
+        }
+
+        .pricing-card:hover {
+            transform: scale(1.05);
+            border-color: var(--gold);
+            box-shadow: 0 25px 60px rgba(212, 175, 55, 0.3);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--gold);
+            border-width: 3px;
+            transform: scale(1.05);
+        }
+
+        .pricing-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
             letter-spacing: 2px;
-            transition: 0.3s;
-            border: 1px solid var(--rouge);
-            margin-top: auto;
         }
 
-        .btn:hover { 
-            background-color: transparent; 
-            color: var(--rouge); 
+        .pricing-duration {
+            color: var(--light-gold);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
         }
 
-        .btn-gold { 
-            background-color: var(--or); 
-            color: var(--fond); 
-            border: 1px solid var(--or); 
-        }
-        
-        .btn-gold:hover { 
-            background-color: transparent; 
-            color: var(--or); 
+        .pricing-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 1rem;
         }
 
-        footer { 
-            padding: 60px 20px; 
-            text-align: center; 
-            background: #0f1418; 
-            border-top: 1px solid var(--or); 
+        .pricing-description {
+            color: var(--cream);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            min-height: 60px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            color: var(--cream);
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .pricing-features li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+
+        .cta-secondary {
+            display: inline-block;
+            background: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        .cta-secondary:hover {
+            background: var(--gold);
+            color: var(--dark-brown);
+        }
+
+        /* Section Vidéo */
+        .video-section {
+            background: rgba(26, 20, 16, 0.5);
+            border-radius: 20px;
+            padding: 4rem;
+            margin: 4rem 0;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Section Process */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .step {
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .step-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            font-weight: 700;
+            color: rgba(212, 175, 55, 0.2);
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .step h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .step p {
+            color: var(--cream);
+            line-height: 1.7;
+        }
+
+        /* Formulaire de contact */
+        .contact-form {
+            max-width: 800px;
+            margin: 4rem auto;
+            background: rgba(74, 52, 40, 0.3);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            padding: 3rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(26, 20, 16, 0.5);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 10px;
+            color: var(--cream);
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+            color: var(--dark-brown);
+            border: none;
+            padding: 1.2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(26, 20, 16, 0.95);
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 3rem 5%;
+            text-align: center;
+            margin-top: 6rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            letter-spacing: 4px;
+        }
+
+        .footer-tagline {
+            font-family: 'Cormorant Garamond', serif;
             font-style: italic;
-            color: var(--or);
+            color: var(--light-gold);
+            margin-bottom: 2rem;
         }
 
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--cream);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .copyright {
+            color: rgba(245, 241, 232, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Quote */
+        .quote-section {
+            text-align: center;
+            padding: 6rem 5%;
+            position: relative;
+        }
+
+        .quote-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--gold);
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.5;
+            position: relative;
+        }
+
+        .quote-text::before,
+        .quote-text::after {
+            font-size: 4rem;
+            color: rgba(212, 175, 55, 0.3);
+            position: absolute;
+        }
+
+        .quote-text::before {
+            content: '"';
+            top: -2rem;
+            left: -2rem;
+        }
+
+        .quote-text::after {
+            content: '"';
+            bottom: -2rem;
+            right: -2rem;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .logo { font-size: 3rem; }
-            section { padding: 60px 20px; }
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.3rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .pricing-container {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .quote-text {
+                font-size: 1.8rem;
+            }
+
+            .quote-text::before,
+            .quote-text::after {
+                font-size: 3rem;
+            }
+        }
+
+        /* Animation au scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
-
-<header>
-    <h1 class="logo">IMMORTALIA</h1>
-    <p class="tagline">Ne laissez pas vos souvenirs dormir, faites-les chanter.</p>
-    <a href="#offres" class="btn" style="background: transparent; border: 1px solid var(--or); color: var(--or);">Entrer dans la galerie</a>
-</header>
-
-<section id="concept">
-    <h2>L'Écho d'une Vie</h2>
-    <p style="font-size: 1.3rem; max-width: 900px; margin: auto; color: var(--blanc-casse);">
-        Nous transformons vos archives photographiques en <strong>récits cinématographiques</strong>. 
-        À l'aide d'une narration poétique et de l'intelligence artificielle, nous redonnons vie 
-        aux instants précieux pour créer un héritage qui traverse le temps.
-    </p>
-</section>
-
-<section id="offres">
-    <div class="pricing-container">
-        <div class="card">
-            <div>
-                <h3>L'Étincelle</h3>
-                <p class="description">Un hommage condensé et puissant. Parfait pour un partage immédiat.</p>
-                <div class="price">49€</div>
-                <p>(30 secondes · 4 scènes personnalisées)</p>
-            </div>
-            <a href="TON_LIEN_GOOGLE_FORM" class="btn">Commander</a>
-        </div>
-
-        <div class="card" style="border-width: 2px; box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);">
-            <div>
-                <h3 style="color: var(--or);">Le Récit</h3>
-                <p class="description">L'équilibre parfait. Une immersion profonde dans les moments clés d'un parcours.</p>
-                <div class="price">189€</div>
-                <p>(2 à 3 minutes · Narration complète)</p>
-            </div>
-            <a href="TON_LIEN_GOOGLE_FORM" class="btn btn-gold">Commander</a>
-        </div>
-
-        <div class="card">
-            <div>
-                <h3>L'Héritage</h3>
-                <p class="description">L'œuvre ultime. Une biographie visuelle complète pour marquer l'histoire familiale.</p>
-                <div class="price">349€</div>
-                <p>(5 à 6 minutes · Qualité Cinéma)</p>
-            </div>
-            <a href="TON_LIEN_GOOGLE_FORM" class="btn">Commander</a>
-        </div>
+    <!-- Particules flottantes -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
     </div>
-</section>
 
-<footer>
-    <p>IMMORTALIA &copy; 2026<br>Héritages Sonores & Visuels</p>
-</footer>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-content">
+            <div class="logo">IMMORTALIA</div>
+            <div class="nav-links">
+                <a href="#concept">Concept</a>
+                <a href="#forfaits">Forfaits</a>
+                <a href="#process">Process</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
 
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>IMMORTALIA</h1>
+            <p class="tagline">Ne laissez pas vos souvenirs s'éteindre, faites-les chanter.</p>
+            <p class="hero-description">
+                Une photo capture un instant. Nous capturons une âme. Nous possédons tous des milliers de photos oubliées dans nos téléphones. Des visages aimés, des sourires d'enfants, des regards de nos anciens... Mais qui raconte leur histoire ?
+            </p>
+            <a href="#contact" class="cta-primary">Créer Votre Légende</a>
+        </div>
+    </section>
+
+    <!-- Section Concept -->
+    <section id="concept">
+        <h2 class="section-title fade-in">Votre histoire mérite une légende</h2>
+        <p class="section-subtitle fade-in">L'Album Souvenir 2.0 : une fusion révolutionnaire entre l'art du récit, la puissance de la musique et l'intelligence artificielle visuelle.</p>
+        
+        <div class="concept-grid">
+            <div class="concept-card fade-in">
+                <div class="concept-icon">✍️</div>
+                <h3>Une plume poétique</h3>
+                <p>Un texte de rap ou de slam profond, écrit sur mesure pour honorer vos proches. Chaque mot résonne avec l'essence de votre histoire.</p>
+            </div>
+            <div class="concept-card fade-in">
+                <div class="concept-icon">🎨</div>
+                <h3>Une immersion totale</h3>
+                <p>Là où les photos manquent, l'IA génère des scènes oniriques pour illustrer vos souvenirs les plus lointains.</p>
+            </div>
+            <div class="concept-card fade-in">
+                <div class="concept-icon">🏛️</div>
+                <h3>Un héritage éternel</h3>
+                <p>Un film qui traverse les générations pour que l'âme de votre lignée ne cesse jamais de résonner.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Vidéo Exemple -->
+    <section class="video-section fade-in">
+        <h2 class="section-title">Découvrez l'expérience Immortalia</h2>
+        <p class="section-subtitle">Un exemple de ce que nous créons pour immortaliser vos mémoires</p>
+        <div class="video-container">
+            <iframe src="https://drive.google.com/file/d/1e-LRksMtuICSIxAc9SpSBVTDVLM13b0h/preview" allow="autoplay"></iframe>
+        </div>
+    </section>
+
+    <!-- Section Forfaits -->
+    <section id="forfaits">
+        <h2 class="section-title fade-in">Choisissez votre format de transmission</h2>
+        <p class="section-subtitle fade-in">Parce que chaque hommage est unique, nous avons conçu des parcours adaptés à chaque intention</p>
+        
+        <div class="pricing-container">
+            <div class="pricing-card fade-in">
+                <div class="pricing-icon">▶️</div>
+                <h3 class="pricing-name">L'ÉTINCELLE</h3>
+                <p class="pricing-duration">(30s)</p>
+                <div class="pricing-price">€49</div>
+                <p class="pricing-description">30 secondes de poésie pure. Un format percutant pour un hommage vibrant.</p>
+                <ul class="pricing-features">
+                    <li>4 scènes cinématographiques</li>
+                    <li>Texte poétique personnalisé</li>
+                    <li>Montage dynamique</li>
+                    <li>Parfait pour les réseaux sociaux</li>
+                </ul>
+                <a href="#contact" class="cta-secondary">Déscripteur</a>
+            </div>
+            
+            <div class="pricing-card featured fade-in">
+                <div class="pricing-icon">🎬</div>
+                <h3 class="pricing-name">LE RÉCIT</h3>
+                <p class="pricing-duration">(2-3 min)</p>
+                <div class="pricing-price">€189</div>
+                <p class="pricing-description">2 à 3 minutes d'émotion. Le format idéal pour raconter un chapitre de vie.</p>
+                <ul class="pricing-features">
+                    <li>Texte complet personnalisé</li>
+                    <li>Montage professionnel</li>
+                    <li>Scènes IA si nécessaire</li>
+                    <li>Mémoire des pensons</li>
+                </ul>
+                <a href="#contact" class="cta-secondary">Mémoire des pensons</a>
+            </div>
+            
+            <div class="pricing-card fade-in">
+                <div class="pricing-icon">📖</div>
+                <h3 class="pricing-name">L'HÉRITAGE</h3>
+                <p class="pricing-duration">(5-6 min)</p>
+                <div class="pricing-price">€349</div>
+                <p class="pricing-description">5 à 6 minutes de légende. Une œuvre magistrale. Biographie complète.</p>
+                <ul class="pricing-features">
+                    <li>Biographie détaillée</li>
+                    <li>Anecdotes précises intégrées</li>
+                    <li>Qualité cinéma</li>
+                    <li>Prémotitation parfaites</li>
+                </ul>
+                <a href="#contact" class="cta-secondary">Prémotitation parfaites</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="quote-section fade-in">
+        <p class="quote-text">Offrir une vidéo Immortalia, ce n'est pas offrir un cadeau, c'est offrir l'éternité.</p>
+    </section>
+
+    <!-- Section Process -->
+    <section id="process">
+        <h2 class="section-title fade-in">Comment ça marche ?</h2>
+        <p class="section-subtitle fade-in">Trois étapes simples pour créer votre monument audiovisuel</p>
+        
+        <div class="process-steps">
+            <div class="step fade-in">
+                <div class="step-number">01</div>
+                <h3>Le Partage</h3>
+                <p>Vous nous envoyez vos photos et vos anecdotes les plus chères. Chaque détail compte pour nous.</p>
+            </div>
+            <div class="step fade-in">
+                <div class="step-number">02</div>
+                <h3>La Création</h3>
+                <p>Nous écrivons, enregistrons et générons les visuels manquants. Notre équipe donne vie à vos souvenirs.</p>
+            </div>
+            <div class="step fade-in">
+                <div class="step-number">03</div>
+                <h3>L'Émotion</h3>
+                <p>Vous recevez votre film, prêt à être diffusé, pleuré et aimé pour les 50 prochaines années.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulaire de Contact -->
+    <section id="contact">
+        <h2 class="section-title fade-in">Donnez une voix à vos racines</h2>
+        <p class="section-subtitle fade-in">Partagez-nous votre projet et vos préférences</p>
+        
+        <form class="contact-form fade-in" id="contactForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="nom">Nom *</label>
+                    <input type="text" id="nom" name="nom" required>
+                </div>
+                <div class="form-group">
+                    <label for="prenom">Prénom *</label>
+                    <input type="text" id="prenom" name="prenom" required>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="telephone">Téléphone</label>
+                    <input type="tel" id="telephone" name="telephone">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="forfait">Forfait souhaité *</label>
+                <select id="forfait" name="forfait" required>
+                    <option value="">Sélectionnez un forfait</option>
+                    <option value="etincelle">L'Étincelle (30s) - 49€</option>
+                    <option value="recit">Le Récit (2-3 min) - 189€</option>
+                    <option value="heritage">L'Héritage (5-6 min) - 349€</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="personne">Pour qui est ce projet ? *</label>
+                <input type="text" id="personne" name="personne" placeholder="Ex: Ma grand-mère, Mon père, Ma famille..." required>
+            </div>
+            
+            <div class="form-group">
+                <label for="style">Style musical préféré</label>
+                <select id="style" name="style">
+                    <option value="">Sélectionnez un style</option>
+                    <option value="rap">Rap</option>
+                    <option value="slam">Slam</option>
+                    <option value="poesie">Poésie parlée</option>
+                    <option value="autre">Autre (préciser dans le message)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Parlez-nous de votre projet *</label>
+                <textarea id="message" name="message" placeholder="Partagez les anecdotes, les traits de caractère, les moments marquants que vous aimeriez voir immortalisés..." required></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">Commencer Mon Héritage</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">IMMORTALIA</div>
+            <p class="footer-tagline">Faites chanter vos mémoires</p>
+            <div class="footer-links">
+                <a href="#concept">Concept</a>
+                <a href="#forfaits">Forfaits</a>
+                <a href="#process">Process</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <p class="copyright">© 2026 Immortalia. Ne laissez pas le silence s'installer sur votre passé.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Animation au scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Gestion du formulaire
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Ici, vous pouvez ajouter le code pour envoyer les données du formulaire
+            // Par exemple, vers un service backend ou un service email
+            
+            alert('Merci pour votre intérêt ! Nous vous contacterons très bientôt pour donner vie à votre projet Immortalia.');
+            this.reset();
+        });
+    </script>
 </body>
 </html>
